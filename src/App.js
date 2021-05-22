@@ -7,20 +7,14 @@ import Description from './Components/Description';
 import Container from './Components/Container';  
 import InstallMetamask from './Components/InstallMetamask';  
 import UnlockMetamask from './Components/UnlockMetamask';  
-import TokenZendR from './build/contracts/TokenZendR.json';  
+import TokenZendR from './build/contracts/TokenZendR.json';
+import './App.css';  
 
 function App() {
   let tokens = Tokens;  //list of supported tokens by token-zendr contract
   let appName = 'TokenZendR';  
   let isWeb3 = true; //If metamask is installed  
-  let isWeb3Locked = false; //If metamask account is locked \
-  //bind this methods to enable them change state from children components
-  // let newTransfer = let newTransfer.bind(this);  
-  // let closeTransfer = let closeTransfer.bind(this);  
-  // let onInputChangeUpdateField = let onInputChangeUpdateField.bind(this);\
-
-  
-  
+  let isWeb3Locked = false; //If metamask account is locked 
 
   // State
   let [tzAddress, setTzAddress] = useState(null);
@@ -124,12 +118,6 @@ function App() {
       if(!err) setDefaultGasPrice(Number(price));
     }); 
   };
-  
-  // const setContractAddress = () => {  
-  //   tokenZendr.deployed().then((instance) => {
-  //     setTzAddress(instance.address);  
-  //   }); 
-  // };
 
   const resetApp = () => {
     setTransferDetail({});
@@ -167,20 +155,8 @@ function App() {
     let receiver = fields.receiver;  
 
 
-
-    // amount = amount;
-
-      
-    console.log(amount, "BIGNUMBERRRRRR")
-
-
-
     //Approve the token-zendr contract to spend on your behalf
-    // contract.methods.approve(tzAddress, amount, (err,response)=>{  
-    
     let approve = await contract.methods.approve(tzAddress, amount).call(transObj);
-
-    console.log(approve, "HASIL APPROVE")
 
     if(approve){
       console.log(tokenZendr, "TOKEN ZENDR")
@@ -190,7 +166,6 @@ function App() {
       //Transfer the token to third party on user behalf
       try{
         let response = await tokenZendr.methods.transferTokens(symbol, receiver, amount).send(transObj);  
-        console.log(response, "RESPONSEEEEEEEEEEEE")
         resetApp(); 
         
         setTx(response.tx);
@@ -230,20 +205,12 @@ function App() {
       
       setNetwork(web3Instance);
       setGasPrice(web3Instance);
-      // setContractAddress(web3);
-  
-      // Tokens.forEach((token) => {
-      //   console.log(token);
-      // })
-
 
       for(let token of tokens){
         let erc20Token = await new web3Instance.eth.Contract(
           token.abi,
           token.address,
         );
-
-        
 
         let decimal = token.decimal;  
         let precision = '1e' + decimal;  
@@ -256,8 +223,6 @@ function App() {
 
       
         balance = balance >= 0 ? balance : 0;
-        
-        
       
         let tokens = userTokens;  
       
