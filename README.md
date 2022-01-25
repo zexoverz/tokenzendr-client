@@ -13,7 +13,7 @@ In the second part of this tutorial, you will learn how to:
 
 ## Result Testing
 
- ![alt text](https://github.com/zexoverz/tokenzendr-client/blob/master/public/tokenZendr.png)
+ ![Logo](https://github.com/zexoverz/tokenzendr-client/blob/master/public/tokenZendr.png)
 
 ## source tutorial
 
